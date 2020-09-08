@@ -23,28 +23,28 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Content can't be blank")
     end
     it "genreの説明が空だと保存できない"  do
-      @item.genre_id = nil
+      @item.genre_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Genre can't be blank")
     end
     it "itemdetailが空だと保存できない"  do
-      @item.itemdetail_id = nil
+      @item.itemdetail_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Itemdetail can't be blank")
     end
     it "shippingdetailが空だと保存できない"  do
-      @item.shippingdetail_id = nil
+      @item.shippingdetail_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Shippingdetail can't be blank")
     end
     it "shippingprefectureを選択していないと保存できないこと" do
-      @item.shippingprefecture_id = nil
-      # binding./ry
+      @item.shippingprefecture_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shippingprefecture can't be blank")
+      # binding.pry
+      expect(@item.errors.full_messages).to include("Shippingprefectur can't be blank")
     end
     it "shippingDayが空だと保存できない"  do
-      @item.shipping_day_id = nil
+      @item.shipping_day_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping day can't be blank")
     end
