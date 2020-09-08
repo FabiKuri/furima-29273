@@ -6,7 +6,7 @@ FactoryBot.define do
     genre_id                 { 2 }
     itemdetail_id            { 3 }
     shippingdetail_id        { 2 }
-    shippingprefecture_id   { '東京都' }
+    shippingprefecture_id   { 2 }
     shipping_day_id          { 2 }
     price                 {3000}
     association :user
