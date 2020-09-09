@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  # get 'users/new'
-  # post 'items/new'
-  devise_for :users
+  devise_for :user
   root to: 'items#index'
   resources :users, only: [:create]
-  resources :items, only: [:index, :new, :create,]
-  # get 'items/:price', to: 'items#checked'
+  resources :items, only: [:index, :new, :create, :show]
 end

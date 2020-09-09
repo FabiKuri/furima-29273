@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
-    @item = Item.all.order("created_at DESC")
-    
+    @items = Item.all.order("created_at DESC")
   end
 
   def new
@@ -17,6 +16,11 @@ class ItemsController < ApplicationController
       @item = @item.include(:user)
       render :new
     end
+  end
+
+  def show
+    # binding.pry
+    @item = Item.find(params[:id])
   end
 
   def checked
