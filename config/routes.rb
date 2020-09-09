@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: 'items#index'
   resources :users, only: [:create]
   resources :items, only: [:index, :new, :create, :show]
+  get 'items/:price', to: 'items#checked'
 end
