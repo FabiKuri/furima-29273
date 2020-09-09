@@ -48,7 +48,7 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping day can't be blank")
     end
-    it "priceが空だと保存できない"  do
+    it "価格の範囲が¥300~¥9,999,999の間であること"  do
       @item.price = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")

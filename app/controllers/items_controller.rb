@@ -1,9 +1,6 @@
 class ItemsController < ApplicationController
-  # # before_action :authenticate_user!
-  # before_action :move_to_index, expect: [:index, :show]
 
   def index
-    @items = Item.all
   end
 
   def new
@@ -17,22 +14,19 @@ class ItemsController < ApplicationController
     else 
       render :new
     end
-
-    # @item = Item.creaate(content: params[:price], checked: false)
-    # render json:{ price: price}
   end
 
-  # def checked
-  #   item = Item.find(params[:price])
-  #   if item.checked
-  #     item.update(checked: false)
-  #   else
-  #     post.update(checked: true)
-  #   end
+  def checked
+    item = Item.find(params[:price])
+    if item.checked
+      item.update(checked: false)
+    else
+      post.update(checked: true)
+    end
 
-  #   post = Item.find(params[:price])
-  #   render json: [ item: post]
-  # end
+    post = Item.find(params[:price])
+    render json: [ item: post]
+  end
 
   private
 
@@ -41,12 +35,4 @@ class ItemsController < ApplicationController
       :shippingprefecture_id, :shipping_day_id, :price, :image).merge(user_id: current_user.id)
   end
 
-
-
-
-  # def move_to_index
-  #   unless user_signed_in?
-  #     redirect_to action: index
-  #   end
-  # end
 end
