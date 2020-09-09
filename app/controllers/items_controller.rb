@@ -21,6 +21,10 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit 
+    @item = Item.find(params[:id ])
+  end
+
   def checked
     item = Item.find(params[:price])
     if item.checked
