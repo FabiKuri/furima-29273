@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
 
   def index
+    @item = Item.all.order("created_at DESC")
+    
   end
 
   def new
@@ -12,6 +14,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else 
+      @item = @item.include(:user)
       render :new
     end
   end
