@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(version: 2020_09_11_103251) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code", default: "", null: false
-    t.integer "prefecture", null: false
+    t.integer "prefecture_id", null: false
     t.string "city", default: ""
     t.string "house_number", default: ""
     t.string "building_name", default: ""
+    t.integer "phone_number", null: false
     t.integer "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
