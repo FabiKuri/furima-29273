@@ -5,10 +5,29 @@ class OrdersController < ApplicationController
   end
 
   def create
-   
+    @order = Order.new(order_params)
+    if @order.valid?
+      pay_item@order.save
+      return redirect_to root_path
+    else 
+      render 'index'
+    end
   end
 
   private
+
+  def order_params
+    params.permit(:token, :user_id)
+  end
+
+  def pay_item
+    Payjp.api_key = "sk_test_XXXXXXXX"  
+    Payjp::Charge.create(
+      customer: order_params[:user_id], 
+      card: order_params[:token],    
+      currency:'jpy'                 
+    )
+  end
 
   def item_params
     params.permit(:name, :content, :genre_id, :itemdetail_id, :shippingdetail_id, 
