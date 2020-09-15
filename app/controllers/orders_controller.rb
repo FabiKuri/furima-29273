@@ -1,36 +1,49 @@
 class OrdersController < ApplicationController
 
   def index
-    @order =
+    @order = Order.new
     @item = Item.find(item_params[:item_id])
+    @order = UserOrder.new
+    # binding.pryd
   end
 
-  def create
-    @order = Order.new(order_params)
+  # def new
+  #   @order = UserOrder.new
+  # end
+
+    def create
+    
+    @order = UserOrder.new(user_order_params)
+    # binding.pry
     if @order.valid?
-      pay_item@order.save
+      pay_item
+      @order.save
       return redirect_to root_path
     else 
-      render 'index'
+      @item = Item.find(item_params[:item_id])
+      render :index
     end
+    
   end
 
-  private
-
-  def order_params
-    params.permit(:token, :user_id)
-  end
-
-  def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
-    Payjp::Charge.create(
-      card: order_params[:token],    
-      currency:'jpy'                 
-    )
-  end
+  private 
 
   def item_params
     params.permit(:name, :content, :genre_id, :itemdetail_id, :shippingdetail_id, 
-      :shippingprefecture_id, :shipping_day_id, :price, :image, :item_id).merge(user_id: current_user.id)
+      :prefecture_id, :shipping_day_id, :price, :image, :item_id).merge(user_id: current_user.id)
+  end
+
+  def  user_order_params
+  params.permit(:token, :image, :name, :name_reading, :nickname, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :price)
+  end
+
+  def pay_item
+    @item = Item.find(item_params[:item_id])
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+    Payjp::Charge.create(
+      amount: @item.price, 
+      card: user_order_params[:token],    
+      currency:'jpy'                 
+    )
   end
 end
