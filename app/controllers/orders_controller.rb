@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
   def create
     # binding.pry
     @order = UserOrder.new(user_order_params)
+    # binding.pry
     if @order.valid?
       pay_item
       @order.save
@@ -24,10 +25,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def  done
-    @order = UserOrder.find(params[:id])
-    @order.update( order_id: current_user.id)
-   end
+  # def  done
+  #   @order = UserOrder.find(params[:id])
+  #   @order.update( order_id: current_user.id)
+  #  end
 
   private 
 
@@ -37,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def  user_order_params
-  params.permit(:token, :image, :name, :name_reading, :nickname, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :price)
+  params.permit(:token, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :item_id).merge(user_id: current_user.id)
   end
 
   def pay_item
