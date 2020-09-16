@@ -13,5 +13,5 @@ class Item < ApplicationRecord
 
   validates :image, presence: true
   validates :name, :content, :genre_id, :itemdetail_id, :shippingdetail_id, :shippingprefecture_id, :shipping_day_id, :price, presence: true
-  validates :genre_id, :itemdetail_id, :shippingdetail_id, :shippingprefecture_id, :shipping_day_id, numericality: { other_than: 1 }
+  validates :genre_id, :itemdetail_id, :shippingdetail_id, :shippingprefecture_id, :shipping_day_id, numericality: { other_than: 0 }
 end
