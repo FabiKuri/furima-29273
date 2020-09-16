@@ -11,10 +11,9 @@ class OrdersController < ApplicationController
   #   @order = UserOrder.new
   # end
 
-    def create
-    
-    @order = UserOrder.new(user_order_params)
+  def create
     # binding.pry
+    @order = UserOrder.new(user_order_params)
     if @order.valid?
       pay_item
       @order.save
@@ -23,8 +22,12 @@ class OrdersController < ApplicationController
       @item = Item.find(item_params[:item_id])
       render :index
     end
-    
   end
+
+  def  done
+    @order = UserOrder.find(params[:id])
+    @order.update( order_id: current_user.id)
+   end
 
   private 
 
