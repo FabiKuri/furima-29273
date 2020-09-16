@@ -25,11 +25,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def  done
-  #   @order = UserOrder.find(params[:id])
-  #   @order.update( order_id: current_user.id)
-  #  end
-
   private 
 
   def item_params
