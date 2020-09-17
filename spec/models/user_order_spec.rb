@@ -5,9 +5,9 @@ RSpec.describe UserOrder, type: :model do
     before do
       @user_order = FactoryBot.build(:user_order)
     end
-      it "すべての値が正しく入力されていれば保存できること"  do
-        expect(@user_order).to be_valid
-      end
+    it "すべての値が正しく入力されていれば保存できること" do
+      expect(@user_order).to be_valid
+    end
     it 'postalcodeが空だと保存できないこと' do
       @user_order.postal_code = nil
       @user_order.valid?
